@@ -1,0 +1,32 @@
+name: CI Teste
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js (exemplo)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar testes
+        run: echo "Executando testes fictícios de CI com sucesso!"
+
+      - name: Teste SAST
+        run: echo "Executando teste SAST"
+
+      - name: Teste DAST
+        run: echo "Executando teste DAST"
