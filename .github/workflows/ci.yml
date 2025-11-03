@@ -1,4 +1,4 @@
-name: CI Teste HTML/CSS
+name: CI Teste HTML/CSS + SAST + DAST
 
 on:
   push:
@@ -7,7 +7,9 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # 🧱 Job 1 - Teste de verificação básica (CI)
   test:
+    name: Teste CI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código
@@ -22,9 +24,26 @@ jobs:
       - name: Teste final
         run: echo "Pipeline concluído com sucesso! 🚀"
 
+  # 🔍 Job 2 - Teste SAST (análise estática)
+  sast:
+    name: Teste SAST
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Teste SAST
-        run: echo "Executando teste SAST"
+      - name: Executar SAST
+        run: echo "Executando teste SAST 🔒"
 
-      - name: Teste DAST
-        run: echo "Executando teste DAST"
+  # 🌐 Job 3 - Teste DAST (análise dinâmica)
+  dast:
+    name: Teste DAST
+    runs-on: ubuntu-latest
+    needs: sast
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Executar DAST
+        run: echo "Executando teste DAST 🌐"
