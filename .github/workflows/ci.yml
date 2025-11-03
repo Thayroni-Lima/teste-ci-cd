@@ -1,4 +1,4 @@
-name: CI Teste
+name: CI Teste HTML/CSS
 
 on:
   push:
@@ -7,23 +7,21 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js (exemplo)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Verificar arquivos existentes
+        run: |
+          echo "Verificando arquivos..."
+          test -f index.html && echo "index.html encontrado ✅"
+          test -f style.css && echo "style.css encontrado ✅"
 
-      - name: Instalar dependências
-        run: npm install
+      - name: Teste final
+        run: echo "Pipeline concluído com sucesso! 🚀"
 
-      - name: Rodar testes
-        run: echo "Executando testes fictícios de CI com sucesso!"
 
       - name: Teste SAST
         run: echo "Executando teste SAST"
